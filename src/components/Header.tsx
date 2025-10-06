@@ -1,11 +1,27 @@
 import { Button } from "@/components/ui/button";
 import React from "react";
 import { SidebarContext } from "@/components/ui/sidebar";
+import { useAuth } from "@/contexts/AuthContext";
+import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const Header = () => {
   // Use SidebarContext directly so we don't violate hooks rules if provider isn't present.
   const ctx = React.useContext(SidebarContext);
   const toggleSidebar = ctx?.toggleSidebar ?? null;
+  const { user, signOut } = (() => {
+    try {
+      return useAuth();
+    } catch {
+      return { user: null, signOut: () => {} } as any;
+    }
+  })();
+  const navigate = useNavigate();
+
+  const handleSignOut = () => {
+    signOut();
+    navigate("/");
+  };
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-background border-b border-border">
@@ -44,12 +60,20 @@ const Header = () => {
           </nav>
         </div>
         <div className="flex items-center gap-2">
-          <Button variant="ghost" size="sm" className="text-sm">
-            Sign In
-          </Button>
-          <Button size="sm" className="text-sm" asChild>
-            <a href="/dashboard">Sign Up</a>
-          </Button>
+          {user ? (
+            <Button variant="ghost" size="sm" className="text-sm" onClick={handleSignOut}>
+              Sign Out
+            </Button>
+          ) : (
+            <>
+              <Button variant="ghost" size="sm" className="text-sm" asChild>
+                <a href="/signin">Sign In</a>
+              </Button>
+              <Button size="sm" className="text-sm" asChild>
+                <a href="/signup">Sign Up</a>
+              </Button>
+            </>
+          )}
         </div>
       </div>
     </header>
