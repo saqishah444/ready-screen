@@ -32,7 +32,7 @@ const Sidebar = ({ isOpen, onClose }: SidebarProps) => {
       {/* Sidebar */}
       <aside className={`
         fixed lg:static inset-y-0 left-0 z-50
-        w-64 lg:w-64 xl:w-64 border-r border-border bg-background flex flex-col min-h-screen lg:h-screen
+        w-64 lg:w-64 xl:w-64 border-r border-border bg-gray-100 flex flex-col min-h-screen lg:h-screen
         transform transition-transform duration-300 ease-in-out
         ${isOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'}
       `}>

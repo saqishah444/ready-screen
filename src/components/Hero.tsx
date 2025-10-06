@@ -15,7 +15,7 @@ const Hero = () => {
     <div className="min-h-screen flex items-center justify-center px-4 pt-14">
       <div className="w-full max-w-2xl mx-auto text-center space-y-8">
         <div className="space-y-4">
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-semibold tracking-tight">
+          <h1 className="text-4xl md:text-4xl lg:text-5xl font-semibold tracking-tight">
             What do you want to create?
           </h1>
           <p className="text-lg text-muted-foreground">
@@ -24,8 +24,17 @@ const Hero = () => {
         </div>
 
         <form onSubmit={handleSubmit} className="w-full">
-          <div className="relative flex items-center gap-2 p-1 border border-input rounded-lg bg-background shadow-sm hover:shadow-md transition-shadow">
-            <Button
+          <div className="relative flex flex-col justify-center gap-2 p-1 border border-input rounded-lg bg-background shadow-sm hover:shadow-md transition-shadow">
+           
+            <Input
+              type="text"
+              placeholder="Ask v0 to build..."
+              value={prompt}
+              onChange={(e) => setPrompt(e.target.value)}
+              className="flex-1 border-0 bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0 text-base placeholder:text-muted-foreground"
+            />
+             <div className="flex justify-between">
+              <Button
               type="button"
               variant="ghost"
               size="icon"
@@ -34,13 +43,6 @@ const Hero = () => {
             >
               <Plus className="h-5 w-5" />
             </Button>
-            <Input
-              type="text"
-              placeholder="Ask v0 to build..."
-              value={prompt}
-              onChange={(e) => setPrompt(e.target.value)}
-              className="flex-1 border-0 bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0 text-base placeholder:text-muted-foreground"
-            />
             <Button
               type="submit"
               size="icon"
@@ -49,6 +51,7 @@ const Hero = () => {
             >
               <ArrowRight className="h-5 w-5" />
             </Button>
+             </div>
           </div>
         </form>
       </div>

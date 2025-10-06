@@ -19,10 +19,9 @@ const Header = () => {
   };
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-background border-b border-border">
+    <header className="fixed top-0 left-0 right-0 z-50 bg-gray-100 border-b border-border">
       <div className="container mx-auto px-4 h-14 flex items-center justify-between">
-        <div className="flex items-center gap-4 md:gap-8">
-          <button
+        <button
             type="button"
             onClick={() => {
               if (toggleSidebar) {
@@ -36,7 +35,9 @@ const Header = () => {
           >
             <div className="w-6 h-6 bg-foreground rounded" />
           </button>
-          <nav className="hidden md:flex items-center gap-6">
+        <div className="flex items-center gap-4 md:gap-8">
+          
+          <nav className="hidden md:flex items-end gap-6">
             <a href="#" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
               Templates
             </a>
