@@ -30,8 +30,8 @@ const Header = () => {
           <Button variant="ghost" size="sm" className="text-sm">
             Sign In
           </Button>
-          <Button size="sm" className="text-sm">
-            Sign Up
+          <Button size="sm" className="text-sm" asChild>
+            <a href="/dashboard">Sign Up</a>
           </Button>
         </div>
       </div>
