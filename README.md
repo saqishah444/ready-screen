@@ -64,51 +64,6 @@ This project is built with:
 
 Simply open [Lovable](https://lovable.dev/projects/67abc3fe-f9cb-47c2-819a-52c1ce16cba7) and click on Share -> Publish.
 
-## Optional: Netlify Functions + Neon (Postgres) backend
-
-This project includes example Netlify Functions in `netlify/functions/` that use `@netlify/neon` (Neon/Postgres).
-
-Quick setup:
-
-1. Install function dependencies:
-
-```powershell
-npm install @netlify/neon bcryptjs
-```
-
-2. Add your database connection string to Netlify's `NETLIFY_DATABASE_URL` environment variable (in the Netlify project settings). Locally you can set it in your environment when running Netlify dev.
-
-3. Table schemas (example SQL):
-
-```sql
--- users table
-CREATE TABLE users (
-	id SERIAL PRIMARY KEY,
-	name TEXT,
-	email TEXT UNIQUE NOT NULL,
-	password_hash TEXT NOT NULL,
-	created_at TIMESTAMP WITH TIME ZONE DEFAULT now()
-);
-
--- posts table (example)
-CREATE TABLE posts (
-	id SERIAL PRIMARY KEY,
-	title TEXT NOT NULL,
-	body TEXT,
-	created_at TIMESTAMP WITH TIME ZONE DEFAULT now()
-);
-```
-
-4. Example functions added:
-
-- `netlify/functions/get-post.js` — GET post by id (query param `id`).
-- `netlify/functions/auth-signup.js` — POST with JSON { name, email, password } to create a user.
-- `netlify/functions/auth-signin.js` — POST with JSON { email, password } to authenticate and receive a simple token.
-
-Notes:
-- These functions are examples/demos. For production, use secure session cookies, HTTPS-only tokens, proper error handling, rate limiting, and input validation.
-- The `@netlify/neon` package will read the connection string from `process.env.NETLIFY_DATABASE_URL` automatically.
-
 ## Can I connect a custom domain to my Lovable project?
 
 Yes, you can!
