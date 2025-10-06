@@ -1,8 +1,13 @@
 import { Button } from "@/components/ui/button";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { Plus, Search, FileText, MessageSquare, Layers, FileCode, Star, ChevronRight } from "lucide-react";
+import { Plus, Search, FileText, MessageSquare, Layers, FileCode, Star, ChevronRight, X } from "lucide-react";
 
-const Sidebar = () => {
+interface SidebarProps {
+  isOpen: boolean;
+  onClose: () => void;
+}
+
+const Sidebar = ({ isOpen, onClose }: SidebarProps) => {
   const recentChats = [
     "Create pricing page",
     "Create pricing page", 
@@ -15,8 +20,30 @@ const Sidebar = () => {
   ];
 
   return (
-    <aside className="w-64 border-r border-border bg-background flex flex-col h-screen">
-      <div className="p-4 border-b border-border">
+    <>
+      {/* Mobile Overlay */}
+      {isOpen && (
+        <div 
+          className="fixed inset-0 bg-background/80 backdrop-blur-sm z-40 lg:hidden"
+          onClick={onClose}
+        />
+      )}
+      
+      {/* Sidebar */}
+      <aside className={`
+        fixed lg:static inset-y-0 left-0 z-50
+        w-64 border-r border-border bg-background flex flex-col h-screen
+        transform transition-transform duration-300 ease-in-out
+        ${isOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'}
+      `}>
+        {/* Close button for mobile */}
+        <div className="lg:hidden absolute top-4 right-4">
+          <Button variant="ghost" size="icon" onClick={onClose}>
+            <X className="h-4 w-4" />
+          </Button>
+        </div>
+
+        <div className="p-4 border-b border-border">
         <Button className="w-full justify-start gap-2" size="sm">
           <Plus className="h-4 w-4" />
           New Chat
@@ -74,6 +101,7 @@ const Sidebar = () => {
         </div>
       </ScrollArea>
     </aside>
+    </>
   );
 };
 
