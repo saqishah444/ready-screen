@@ -1,13 +1,30 @@
 import { Button } from "@/components/ui/button";
+import React from "react";
+import { SidebarContext } from "@/components/ui/sidebar";
 
 const Header = () => {
+  // Use SidebarContext directly so we don't violate hooks rules if provider isn't present.
+  const ctx = React.useContext(SidebarContext);
+  const toggleSidebar = ctx?.toggleSidebar ?? null;
+
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-background border-b border-border">
       <div className="container mx-auto px-4 h-14 flex items-center justify-between">
-        <div className="flex items-center gap-8">
-          <a href="/" className="flex items-center gap-2">
+        <div className="flex items-center gap-4 md:gap-8">
+          <button
+            type="button"
+            onClick={() => {
+              if (toggleSidebar) {
+                toggleSidebar();
+                return;
+              }
+              window.location.href = "/";
+            }}
+            className="flex items-center gap-2"
+            aria-label="Home"
+          >
             <div className="w-6 h-6 bg-foreground rounded" />
-          </a>
+          </button>
           <nav className="hidden md:flex items-center gap-6">
             <a href="#" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
               Templates

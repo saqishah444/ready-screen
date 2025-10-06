@@ -4,9 +4,10 @@ import { Menu } from "lucide-react";
 
 interface DashboardHeaderProps {
   onMenuClick: () => void;
+  onLogoClick?: () => void;
 }
 
-const DashboardHeader = ({ onMenuClick }: DashboardHeaderProps) => {
+const DashboardHeader = ({ onMenuClick, onLogoClick }: DashboardHeaderProps) => {
   return (
     <header className="fixed top-0 left-0 lg:left-64 right-0 z-30 bg-background border-b border-border">
       <div className="container mx-auto px-4 h-14 flex items-center justify-between">
@@ -19,10 +20,23 @@ const DashboardHeader = ({ onMenuClick }: DashboardHeaderProps) => {
           >
             <Menu className="h-5 w-5" />
           </Button>
-          <a href="/" className="flex items-center gap-2">
+          <button
+            type="button"
+            onClick={(e) => {
+              // On small screens, use the provided onLogoClick to open sidebar
+              if (onLogoClick) {
+                onLogoClick();
+                return;
+              }
+
+              // Default: navigate to home
+              window.location.href = "/";
+            }}
+            className="flex items-center gap-2"
+          >
             <div className="w-6 h-6 bg-foreground rounded" />
             <span className="text-sm font-medium hidden sm:inline">Personal</span>
-          </a>
+          </button>
           <span className="text-sm text-muted-foreground hidden sm:inline">Free</span>
         </div>
         <div className="flex items-center gap-1 sm:gap-2">
