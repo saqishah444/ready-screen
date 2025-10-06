@@ -27,11 +27,11 @@ const Header = () => {
           </nav>
         </div>
         <div className="flex items-center gap-2">
-          <Button variant="ghost" size="sm" className="text-sm" asChild>
-            <a href="/signin">Sign In</a>
+          <Button variant="ghost" size="sm" className="text-sm">
+            Sign In
           </Button>
           <Button size="sm" className="text-sm" asChild>
-            <a href="/signup">Sign Up</a>
+            <a href="/dashboard">Sign Up</a>
           </Button>
         </div>
       </div>
